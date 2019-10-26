@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Football_Picks.Models.Matchup>
+
+@{
+    ViewData["Title"] = "Picks";
+}
+
+<h1 class="text-shadow text-warning text-bold">Picks - @ViewBag.player.Name</h1>
+
+@if (ViewBag.status == "Not Found")
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                @ViewBag.player.Name has already made their picks &nbsp;<a asp-controller="Players" asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+    @using (Html.BeginForm("SavePicks", "PlayerPick", FormMethod.Post))
+    {
+        <table class="table table-hover table-striped shadow-nohover">
+            <thead class="bg-dark">
+                <tr class="text-warning text-shadow">
+                    <th>
+                        Away
+                    </th>
+                    <th>
+                        Home
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Week)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Year)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="gradient-top-to-bottom">
+                        <td>
+                            <img class="img img-fluid" src="@Url.Content(item.AwayTeam.Logo_Url)" width="64" />
+                            <label>@item.AwayTeam.Team_Name <span class="text-warning text-shadow">(@item.AwayTeam.Team_Record)</span></label>
+                            <input class="ml-3" id="awayTeam" type="checkbox" name="teams" value="@item.AwayTeam.Team_Name" />
+                        </td>
+                        <td>
+                            <img class="img img-fluid" src="@Url.Content(item.HomeTeam.Logo_Url)" width="64" />
+                            <label>@item.HomeTeam.Team_Name <span class="text-warning text-shadow">(@item.HomeTeam.Team_Record)</span></label>
+                            <input class="ml-3" id="homeTeam" type="checkbox" name="teams" value="@item.HomeTeam.Team_Name" />
+                        </td>
+                        <td class="text-warning text-shadow">
+                            @Html.DisplayFor(modelItem => item.Week)
+                        </td>
+                        <td class="text-warning text-shadow">
+                            @Html.DisplayFor(modelItem => item.Year)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="row mb-3">
+            <div class="col-md-2">
+                <input class="form-control shadow-nohover" type="text" name="tiebreaker" placeholder="Tie Breaker Points" />
+            </div>
+            <div class="col-md-10">
+                <p class="text-warning text-shadow text-bold mt-2">Please enter the combined score from both games. in a case of a tie this number will be used to determine a winner.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-inline">
+                    <input class="form-control btn btn-warning shadow-nohover" type="submit" value="Submit" asp-action="SavePicks" asp-controller="PlayerPick" asp-route-id="@ViewBag.playerId" />
+                </div>
+            </div>
+        </div>
+    }
+ 
+}
+

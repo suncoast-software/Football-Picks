@@ -1,0 +1,125 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a:hover {
+    text-decoration: none;
+    text-decoration-style: none;
+}
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+body::after {
+    content: "";
+    background-image: url("/img/nfl-logo/nfl-bg-02.jpg");
+    background-size: cover;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    background-attachment: fixed;
+    z-index: -1;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.shadow-nohover {
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-bg-grey-500 {
+    background: #c6c6c6;
+}
+
+.gradient-bg {
+    background: rgb(108,117,125);
+    background: linear-gradient(90deg, rgba(108,117,125,1) 0%, rgba(108,117,125,0.5) 100%);
+}
+
+.gradient-top-to-bottom {
+    background: rgb(108,117,125);
+    background: linear-gradient(0deg, rgba(108,117,125,1) 0%, rgba(108,117,125,0.5) 100%);
+}
+
+.round-corner-div {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 3px rgba(80, 80, 80, 1);
+}
+
+.main-bg {
+    background-image: url("/img/nfl-bg-02.jpg");
+    background-size: cover; 
+}
+
+.list-group-border-warning {
+    border: solid 1px;
+    border-color: #ff9503;
+}
+
+.list-group-border-primary {
+    border: solid 1px;
+    border-color: #058bfc;
+}
+
+.mt-10 {
+    margin-top: 5rem !important;
+}

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Football_Picks.Models.PlayerWins>
+@{
+    ViewData["Title"] = "Calculate All Player Wins";
+    var index = 0;
+}
+
+<h1 class="text-warning text-shadow text-bold">All Player Wins</h1>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="text-warning text-shadow col-sm-2">
+            @Html.DisplayName("Total Players")
+        </dt>
+        <dd class="col-sm-10 text-bold text-warning text-shadow ">
+            @Model.Count()
+        </dd>
+    </dl>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover table-striped">
+            <thead class="bg-dark text-light">
+                <tr>
+                    <th>Player</th>
+                    <th>Company</th>
+                    <th>Wins</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in Model)
+                {
+                <tr class="gradient-top-to-bottom">
+                    <td class="text-warning text-shadow text-bold">@player.Name</td>
+                    <td class="text-warning text-shadow text-bold">@player.Company</td>
+                    <td class="text-warning text-shadow text-bold">@player.WinCount</td>
+                </tr>
+                    index++;
+                } 
+            </tbody>
+        </table>
+    </div>
+</div>
+

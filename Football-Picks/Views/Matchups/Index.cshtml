@@ -1,0 +1,73 @@
+﻿@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
+@model IEnumerable<Football_Picks.Models.Matchup>
+
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="text-warning text-shadow">Matchups: Week @ViewBag.week</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @using (Html.BeginForm("Search", "Matchups", FormMethod.Post))
+        {
+            <div class="form-inline mb-3">
+                <select name="_week" class="form-control shaodow-nohover mr-3" style="width: 100px;">
+                    <option value="@ViewBag.week">@ViewBag.week</option>
+                    @for (int i = 1; i < 17; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <input type="submit" class="form-control btn btn-secondary shadow-nohover" asp-controller="Matchups" asp-action="Index" asp-route-id="week" />
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <thead class="gradient-bg text-black-50">
+                <tr class="text-warning text-shadow">
+                    <th>Away Team</th>
+                    <th>Home Team</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Week)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Year)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="gradient-top-to-bottom">
+                        <td>
+                            <img class="img img-fluid" src="@Url.Content(item.AwayTeam.Logo_Url)" width="64" />
+                            <label class="ml-3 font-weight-bold">@item.AwayTeam.Team_Name</label>
+                            <label class="text-warning ml-1">(@item.AwayTeam.Team_Record)</label>
+                        </td>
+                        <td>
+                            <img class="img img-fluid" src="@Url.Content(item.HomeTeam.Logo_Url)" width="64" />
+                            <label class="ml-3 font-weight-bold">@item.HomeTeam.Team_Name</label>
+                            <label class="text-warning ml-1">(@item.HomeTeam.Team_Record)</label>
+                        </td>
+                        <td class="text-warning text-shadow text-bold">
+                            @Html.DisplayFor(modelItem => item.Week)
+                        </td>
+                        <td class="text-warning text-shadow text-bold">
+                            @Html.DisplayFor(modelItem => item.Year)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

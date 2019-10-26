@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+   <div class="gradient-top-to-bottom text-left shadow-nohover round-corner-div" style="height: 35px;">
+       <div class="ml-2 text-warning" style="font-size: 18pt;"><strong class="text-shadow">Football Picks 2019 &nbsp;Week @ViewBag.week</strong></div> 
+   </div>
+}
+else
+{
+    <div class="row">
+       <div class="col-md-12">
+           <div class="alert alert-info">Please Register or Login to continue!</div>
+       </div>
+    </div>
+}
+

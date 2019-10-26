@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Football_Picks.Models.Player>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="gradient-bg text-left shadow-nohover round-corner-div" style="height: 35px;">
+    <div class="ml-2 text-warning text-shadow" style="font-size: 18pt;"><strong>Football Picks -&nbsp;Players</strong></div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p class="mt-3">
+            <a class="btn btn-warning shadow-nohover text-dark" role="button" asp-action="Create">Create New Player</a>
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped table-hover">
+            <thead class="bg-dark text-white">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Company)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="gradient-top-to-bottom">
+                        <td class="text-warning text-shadow">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="text-light text-shadow">
+                            @Html.DisplayFor(modelItem => item.Company)
+                        </td>
+                        <td>
+                            <a class="text-light" asp-action="Details" asp-route-id="@item.PlayerId">Details</a> |
+                            <a class="text-light" asp-action="Picks" asp-controller="PlayerPick" asp-route-id="@item.PlayerId">Picks</a> |
+                            <a class="text-light" asp-action="CalculateWins" asp-controller="PlayerPick" asp-route-id="@item.PlayerId">Calculate Wins</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p class="mt-1">
+            <a class="btn btn-warning shadow-nohover text-dark" role="button" asp-controller="Players" asp-action="CalculateAllPlayerWins">Calculate ALL Player Wins</a>
+        </p>
+    </div>
+</div>
+
+
