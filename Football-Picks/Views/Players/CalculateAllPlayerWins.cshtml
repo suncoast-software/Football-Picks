@@ -9,10 +9,16 @@
 <div>
     <dl class="row">
         <dt class="text-warning text-shadow col-sm-2">
-            @Html.DisplayName("Total Players")
+            @Html.DisplayName("Total Players:")
         </dt>
         <dd class="col-sm-10 text-bold text-warning text-shadow ">
             @Model.Count()
+        </dd>
+        <dt class="text-warning text-shadow col-sm-2">
+            Action:
+        </dt>
+        <dd class="col-sm-10">
+            <a class="text-primary text-bold" asp-controller="Players" asp-action="Index">Back to List</a>
         </dd>
     </dl>
 </div>

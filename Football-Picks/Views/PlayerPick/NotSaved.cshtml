@@ -3,5 +3,21 @@
     ViewData["Title"] = "NotSaved";
 }
 
-<h1>NotSaved</h1>
+<h1 class="text-danger text-shadow text-bold">ERROR</h1>
+<div>
+    <dl class="row">
+        <dt class="col-sm-2 text-danger text-shadow text-bold">
+            Error Message:
+        </dt>
+        <dd class="col-sm-10 text-danger text-bold">
+            Player picks not complete. the player picks count didn't match the week matchup count!
+        </dd>
+        <dt class="col-sm-2 text-danger text-shadow text-bold">
+            Action:
+        </dt>
+        <dd class="col-sm-10">
+            <a class ="text-danger text-bold" asp-controller="Players" asp-action="Index">Back to List</a>
+        </dd>
+    </dl>
+</div>
 

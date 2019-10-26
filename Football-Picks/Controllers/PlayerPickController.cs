@@ -101,6 +101,13 @@ namespace Football_Picks.Controllers
         {
             string today_Date = DateTime.Now.ToString("M/d/yyy");
             var matchups = MatchupDataHelper.Load_Matchups(week);
+            int matchupCount = matchups.Count();
+            
+            if (matchupCount != teams.Length)
+            {
+                return View(nameof(NotSaved));
+            }
+
             var picks = context.Pick.Where(p => p.PlayerId == id && p.Week == week);
             int _tie;
 
