@@ -131,6 +131,43 @@ namespace Football_Picks.Helpers
         }
 
         #endregion
+
+        /// <summary>
+        /// Calculate the Tie Breaker winning Team
+        /// </summary>
+        /// <param name="away"></param>
+        /// <param name="home"></param>
+        /// <returns>Team</returns>
+        #region CALCULATE TIE BREAKER
+
+        public static int Get_Tie_Breaker_Points()
+        {
+            //calculate winning team
+            int totalPoints = 0;
+            string url = "https://www.footballdb.com/scores/index.html";
+            HtmlWeb page = new HtmlWeb();
+            HtmlDocument doc = page.Load(url);
+
+            HtmlNodeCollection scoreNodes = doc.DocumentNode.SelectNodes("//table");
+
+            HtmlNode teamNodes = scoreNodes[scoreNodes.Count - 1];
+            bool awayResult = int.TryParse(teamNodes.ChildNodes[3].ChildNodes[1].ChildNodes[3].InnerText, out int awayPoints);
+            bool homeResult = int.TryParse(teamNodes.ChildNodes[3].ChildNodes[3].ChildNodes[3].InnerText, out int homePoints);
+
+            if (awayResult == false || homeResult == false)
+            {
+                return 0;
+            }
+            else
+            {
+                totalPoints = awayPoints + homePoints;
+            }
+
+            return totalPoints;
+        }
+
+        #endregion
+
         /// <summary>
         /// load selected week matchups
         /// </summary>

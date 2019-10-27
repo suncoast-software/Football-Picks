@@ -103,7 +103,7 @@ namespace Football_Picks.Controllers
             var matchups = MatchupDataHelper.Load_Matchups(week);
             int matchupCount = matchups.Count();
             
-            if (matchupCount != teams.Length)
+            if (matchupCount != teams.Length || tiebreaker == null)
             {
                 return View(nameof(NotSaved));
             }

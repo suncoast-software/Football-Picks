@@ -177,6 +177,10 @@ namespace Football_Picks.Controllers
         {
             var players = _context.Players.ToList();
             List<PlayerWins> playerWinsList = new List<PlayerWins>();
+            List<PlayerWins> newPlayerWinList = new List<PlayerWins>();
+            List<PlayerWins> tieList = new List<PlayerWins>();
+
+            int totalPoints = MatchupDataHelper.Get_Tie_Breaker_Points();
 
             foreach (var player in players)
             {
@@ -191,9 +195,12 @@ namespace Football_Picks.Controllers
                     }
                 }
                 playerWinsList.Add(new PlayerWins(player.Name, player.Company, winCount));
-
+                newPlayerWinList = playerWinsList.OrderByDescending(p => p.WinCount)
+                                                   .ThenBy(p => p.Name)
+                                                   .ToList();
             }
-            return View(playerWinsList);
+            
+            return View(newPlayerWinList);
         }
 
         // POST: Players/Delete/5
