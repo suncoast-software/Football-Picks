@@ -1,6 +1,7 @@
 ﻿using Football_Picks.Data;
 using Football_Picks.Models;
 using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,25 +40,87 @@ namespace Football_Picks.Helpers
             {
                 if (picks.Count > 0)
                 {
+                    
+                    string test = "";
                     //string pPick = pick.PlayerPick.ToString();
                     if (winners[index].Team_Name.Equals(picks[index].PlayerPick))
                     {
                         string playerPickAbr = GetTeamAbr(picks[index].PlayerPick);
                         string winAbr = GetTeamAbr(winners[index].Team_Name);
+                        string winningTeamRecord  = Get_Team_Record(winner.Team_Name);
+                        string curPickRecord = Get_Team_Record(picks[index].PlayerPick);
                         string pPickUrl = "/img/nfl-logo/" + playerPickAbr + ".png";
                         string winUrl = "/img/nfl-logo/" + winAbr + ".png";
 
-                        winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, "YES"));
+                        winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, winningTeamRecord, curPickRecord, "YES"));
+                        test = "";
 
                     }
                     else
                     {
                         string playerPickAbr = GetTeamAbr(picks[index].PlayerPick);
                         string winAbr = GetTeamAbr(winners[index].Team_Name);
+                        string winningTeamRecord = Get_Team_Record(winner.Team_Name);
+                        string curPickRecord = Get_Team_Record(picks[index].PlayerPick);
+                        string pPickUrl = "/img/nfl-logo/" + playerPickAbr + ".png";
+                        string winUrl = "/img/nfl-logo/" + winAbr + ".png";
+
+                        winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, winningTeamRecord, curPickRecord, "NO"));
+                        test = "";
+                    }
+                    index++;
+                }
+                else
+                    return winList;
+            }
+            return winList;
+        }
+        #endregion
+
+        /// <summary>
+        /// Calculate Player Wins
+        /// </summary>
+        /// <param name="Picks"></param>
+        /// <returns>IEnumerable Pick</returns>
+        #region CALCULATE All PLYAER WINS
+        public static List<MatchupWinner> CalculateAllWins(List<Pick> picks)
+        {
+            List<Team> winners = Get_Current_Week_Winners();
+            List<MatchupWinner> winList = new List<MatchupWinner>();
+
+            int index = 0;
+
+            foreach (var winner in winners)
+            {
+                if (picks.Count > 0)
+                {
+
+                    string test = "";
+                    //string pPick = pick.PlayerPick.ToString();
+                    if (winners[index].Team_Name.Equals(picks[index].PlayerPick))
+                    {
+                        string playerPickAbr = GetTeamAbr(picks[index].PlayerPick);
+                        string winAbr = GetTeamAbr(winners[index].Team_Name);
+                       // string winningTeamRecord = Get_Team_Record(winner.Team_Name);
+                       // string curPickRecord = Get_Team_Record(picks[index].PlayerPick);
+                        string pPickUrl = "/img/nfl-logo/" + playerPickAbr + ".png";
+                        string winUrl = "/img/nfl-logo/" + winAbr + ".png";
+
+                        winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, "YES"));
+                        test = "";
+
+                    }
+                    else
+                    {
+                        string playerPickAbr = GetTeamAbr(picks[index].PlayerPick);
+                        string winAbr = GetTeamAbr(winners[index].Team_Name);
+                       //string winningTeamRecord = Get_Team_Record(winner.Team_Name);
+                        //string curPickRecord = Get_Team_Record(picks[index].PlayerPick);
                         string pPickUrl = "/img/nfl-logo/" + playerPickAbr + ".png";
                         string winUrl = "/img/nfl-logo/" + winAbr + ".png";
 
                         winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, "NO"));
+                        test = "";
                     }
                     index++;
                 }
@@ -299,6 +362,23 @@ namespace Football_Picks.Helpers
         }
         #endregion
 
+        #region
+
+        public static string Get_Team_Record(string teamName)
+        {
+            string name = Convert_Team_Name(teamName);
+            string url = "https://www.footballdb.com/teams/nfl/" + name;
+            HtmlWeb page = new HtmlWeb();
+            HtmlDocument doc = page.Load(url);
+
+            string banner = doc.DocumentNode.SelectSingleNode("//div[@id='teambanner']//b").InnerText;
+            string[] details = banner.Split(new char[] { ':', '(' });
+
+            return details[1];
+        }
+
+        #endregion
+
         #region GET TEAM ABRREVIATION
 
         public static string GetTeamAbr(string team)
@@ -373,6 +453,83 @@ namespace Football_Picks.Helpers
 
             return "";
         }
+        #endregion
+
+        #region CONVERT TEAM NAME
+
+        private static string Convert_Team_Name(string teamName)
+        {
+            switch (teamName)
+            {
+                case "Buffalo":
+                    return "buffalo-bills";
+                case "Miami":
+                    return "miami-dolphins";
+                case "New England":
+                    return "new-england-patriots";
+                case "Jets":
+                    return "new-york-jets";
+                case "Ravens":
+                    return "baltimore-ravens";
+                case "Bengals":
+                    return "cincinnati-bengals";
+                case "Browns":
+                    return "cleveland-browns";
+                case "Steelers":
+                    return "pittsburg-steelers";
+                case "Houston":
+                    return "houston-texans";
+                case "Indianapolis":
+                    return "indianapolis-colts";
+                case "Jacksonville":
+                    return "jacksonville-jaguars";
+                case "Tennessee":
+                    return "tennessee-titans";
+                case "Broncos":
+                    return "denver-broncos";
+                case "Kansas City":
+                    return "kansas-city-chiefs";
+                case "LA Chargers":
+                    return "los-angeles-chargers";
+                case "Oakland":
+                    return "oakland-raiders";
+                case "Cowboys":
+                    return "dallas-cowboys";
+                case "Giants":
+                    return "new-york-giants";
+                case "Philadelphia":
+                    return "philadelphia-eagles";
+                case "Redskins":
+                    return "washington-redskins";
+                case "Chicago":
+                    return "chicago-bears";
+                case "Detroit":
+                    return "detroit-lions";
+                case "Green Bay":
+                    return "green-bay-packers";
+                case "Minnesota":
+                    return "minnesota-vikings";
+                case "Atlanta":
+                    return "atlanta-falcons";
+                case "Panthers":
+                    return "carolina-panthers";
+                case "New Orleans":
+                    return "new-orleans-saints";
+                case "Tampa Bay":
+                    return "tampa-bay-buccaneers";
+                case "Arizona":
+                    return "arizona-cardinals";
+                case "LA Rams":
+                    return "los-angeles-rams";
+                case "San Francisco":
+                    return "san-francisco-49ers";
+                case "Seattle":
+                    return "seattle-seahawks";
+            }
+
+            return "";
+        }
+
         #endregion
     }
 }

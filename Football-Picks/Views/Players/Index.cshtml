@@ -5,7 +5,7 @@
 }
 
 <div class="gradient-bg text-left shadow-nohover round-corner-div" style="height: 35px;">
-    <div class="ml-2 text-warning text-shadow" style="font-size: 18pt;"><strong>Football Picks -&nbsp;Players</strong></div>
+    <div class="ml-2 text-warning text-shadow" style="font-size: 18pt;"><strong>Football Picks -&nbsp;Current Players [@Model.Count()]</strong></div>
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -16,39 +16,29 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-        <table class="table table-striped table-hover">
-            <thead class="bg-dark text-white">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Company)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="gradient-top-to-bottom">
-                        <td class="text-warning text-shadow">
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td class="text-light text-shadow">
-                            @Html.DisplayFor(modelItem => item.Company)
-                        </td>
-                        <td>
-                            <a class="text-light" asp-action="Details" asp-route-id="@item.PlayerId">Details</a> |
-                            <a class="text-light" asp-action="Picks" asp-controller="PlayerPick" asp-route-id="@item.PlayerId">Picks</a> |
-                            <a class="text-light" asp-action="CalculateWins" asp-controller="PlayerPick" asp-route-id="@item.PlayerId">Calculate Wins</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    @foreach (var item in Model)
+    {
+    <div class="col-sm-12">
+        <div class="card card-shadow-sm mb-2">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="text-black-50">Name:<span class="text-dark text-bold"> &nbsp;@Html.DisplayFor(modelItem => item.Name)</span></p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="text-black-50">Company:<span class="text-dark text-bold"> &nbsp;@Html.DisplayFor(modelItem => item.Company)</span></p> 
+                    </div>
+                    <div class="col-sm-4">
+                        <a class="text-secondary" asp-action="Details" asp-route-id="@item.PlayerId">Details</a> |
+                        <a class="text-secondary" asp-action="Picks" asp-controller="PlayerPick" asp-route-id="@item.PlayerId">Picks</a> |
+                        <a class="text-secondary" asp-action="CalculateWins" asp-controller="PlayerPick" asp-route-id="@item.PlayerId">Calculate Wins</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    }
+    
 </div>
 
 

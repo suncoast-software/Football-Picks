@@ -186,7 +186,7 @@ namespace Football_Picks.Controllers
             {
                 int winCount = 0;
                 var playerPicks = _context.Pick.Where(p => p.PlayerId == player.PlayerId && p.Week == week).ToList();
-                var winList = MatchupDataHelper.CalculateWins(playerPicks).ToList();
+                var winList = MatchupDataHelper.CalculateAllWins(playerPicks).ToList();
                 foreach (var item in winList)
                 {
                     if (item.Win.Equals("YES"))
@@ -198,6 +198,15 @@ namespace Football_Picks.Controllers
                 newPlayerWinList = playerWinsList.OrderByDescending(p => p.WinCount)
                                                    .ThenBy(p => p.Name)
                                                    .ToList();
+
+                //check to see if there is a tie
+                bool tieResult = ScoresDataHelper.isTie(newPlayerWinList);
+
+                //if tieResult = true then we need to collect all the players with the same amount of wins
+                if (tieResult)
+                {
+                    tieList = ScoresDataHelper.Get_All_Ties(newPlayerWinList);
+                }
             }
             
             return View(newPlayerWinList);

@@ -156,7 +156,7 @@ namespace Football_Picks.Controllers
             List<MatchupWinner> wins = new List<MatchupWinner>();
             int winCount = 0;
 
-            if (picks.Count() > 1)
+            if (picks.Count() > 0)
             {
                 wins = MatchupDataHelper.CalculateWins(picks);
                 foreach (var win in wins)

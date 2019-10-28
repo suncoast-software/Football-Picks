@@ -4,7 +4,24 @@
     ViewData["Title"] = "CalculateWins";
 }
 
-<h1 class="text-black-50">CalculateWins for: <span class="text-shadow text-warning">@ViewBag.player</span></h1>
+<h1 class="text-black-50">Calculate Wins for: <span class="text-shadow text-warning">@ViewBag.player</span></h1>
+<dl class="row">
+    <dt class="col-sm-2">
+        Tie Breaker Points:
+    </dt>
+    <dd class="col-sm-10">
+        [@ViewBag.tiebreaker]
+    </dd>
+    <dt class="col-sm-2">
+        Wins:
+    </dt>
+    <dd class="col-sm-10">
+        @ViewBag.wincount
+    </dd>
+    <dt class="col-sm-2">
+        <a asp-controller="Players" asp-action="Index">Back to List</a>
+    </dt>
+</dl>
 @if (ViewBag.status == "Not Found")
 {
     <div class="row">
@@ -15,36 +32,52 @@
 }
 else
 {
-<table class="table table-hover table-striped">
-    <thead class="gradient-top-to-bottom text-warning">
-        <tr>
-            <th>Winner</th>
-            <th>Pick</th> 
-            <th>Win</th>
-        </tr>
-    </thead>
+<div class="row">
     @foreach (var pick in Model)
     {
-        <tbody>
-            <tr class="gradient-top-to-bottom">
-                <td><img class="img-fluid img-fluid" src="@Url.Content(@pick.WinTeamLogoUrl)" width="64" /><strong class="text-shadow text-black-50 ml-3">@pick.WinnerTeam</strong></td>
-                <td><img class="img-fluid img-fluid" src="@Url.Content(@pick.PlayerPickLogoUrl)" width="64" /><strong class="text-shadow text-black-50 ml-3">@pick.PlayerPick</strong></td>
-                <td>@pick.Win</td>
-            </tr>
-        </tbody>
+    <div class="col-sm-6 mt-2">
+        <div class="card shadow-nohover">
+            <div class="card-body">
+                <h5 class="card-title">Matchup</h5>
+                <hr />
+                <h6 class="card-subtitle mr-2">Winner<img class="img-fluid" src="@Url.Content(@pick.WinTeamLogoUrl)" width="64" /><strong class="text-black-50 ml-3">@pick.WinnerTeam &nbsp;(@pick.WinRecord)</strong></h6>
+                <h6 class="card-subtitle mt-4 mr-2">Pick<img class="img-fluid ml-4" src="@Url.Content(@pick.PlayerPickLogoUrl)" width="64" /><strong class="text-black-50 ml-3">@pick.PlayerPick &nbsp;(@pick.PlayerPickRecord)</strong></h6>
+                @if (pick.Win.Equals("YES"))
+                {
+                    <p class="card-text text-success text-bold">Win : @pick.Win</p>
+                }
+                else
+                {
+                    <p class="card-text text-danger text-bold">Win : @pick.Win</p>
+                }
 
+            </div>
+        </div>
+    </div>
     }
-</table>
-<div class="row">
-    <div class="col-md-3">
-        <label>Tie Breaker Points &nbsp;[@ViewBag.tiebreaker]</label>
-    </div>
-    <div class="col-md-3">
-        <label>Wins &nbsp;<strong class="text-black-50">@ViewBag.wincount</strong></label>
-    </div>
-    <div class="col-md-3">
-        <a asp-controller="Players" asp-action="Index">Back to List</a>
-    </div>
 </div>
+
 }
+@*<table class="table table-hover table-striped">
+        <thead class="gradient-top-to-bottom text-warning">
+            <tr>
+                <th>Winner</th>
+                <th>Pick</th>
+                <th>Win</th>
+            </tr>
+        </thead>
+        @foreach (var pick in Model)
+        {
+            <tbody>
+                <tr class="gradient-top-to-bottom">
+                    <td><img class="img-fluid" src="@Url.Content(@pick.WinTeamLogoUrl)" width="64" /><strong class="text-shadow text-black-50 ml-3">@pick.WinnerTeam</strong></td>
+                    <td><img class="img-fluid" src="@Url.Content(@pick.PlayerPickLogoUrl)" width="64" /><strong class="text-shadow text-black-50 ml-3">@pick.PlayerPick</strong></td>
+                    <td>@pick.Win</td>
+                </tr>
+            </tbody>
+
+        }
+    </table>*@
+
+
 

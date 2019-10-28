@@ -9,6 +9,19 @@ namespace Football_Picks.Helpers
 {
     public class ScoresDataHelper
     {
-       
+       public static bool isTie(List<PlayerWins> playerWins)
+        {
+            return false;
+        }
+
+        public static List<PlayerWins> Get_All_Ties(List<PlayerWins> playerWins)
+        {
+            return null;
+        }
+
+        public static List<PlayerWins> Calculate_Final_Winner(List<PlayerWins> playerWins)
+        {
+            return null;
+        }
     }
 }

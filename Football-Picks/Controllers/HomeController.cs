@@ -14,6 +14,7 @@ namespace Football_Picks.Controllers
         public IActionResult Index()
         {
             string week = MatchupDataHelper.Get_Current_Week();
+            //string record = MatchupDataHelper.Get_Team_Record("Ravens");
             ViewBag.week = week;
             return View();
         }
