@@ -17,6 +17,7 @@ namespace Football_Picks.Data
         public DbSet<Player> Players { get; set; }
         public DbSet<Pick> Pick { get; set; }
         public DbSet<Matchup> Matchups { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         
     }
 }

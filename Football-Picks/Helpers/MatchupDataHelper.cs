@@ -41,7 +41,7 @@ namespace Football_Picks.Helpers
                 if (picks.Count > 0)
                 {
                     
-                    string test = "";
+                   
                     //string pPick = pick.PlayerPick.ToString();
                     if (winners[index].Team_Name.Equals(picks[index].PlayerPick))
                     {
@@ -53,7 +53,7 @@ namespace Football_Picks.Helpers
                         string winUrl = "/img/nfl-logo/" + winAbr + ".png";
 
                         winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, winningTeamRecord, curPickRecord, "YES"));
-                        test = "";
+                       
 
                     }
                     else
@@ -66,7 +66,7 @@ namespace Football_Picks.Helpers
                         string winUrl = "/img/nfl-logo/" + winAbr + ".png";
 
                         winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, winningTeamRecord, curPickRecord, "NO"));
-                        test = "";
+                       
                     }
                     index++;
                 }
@@ -95,7 +95,7 @@ namespace Football_Picks.Helpers
                 if (picks.Count > 0)
                 {
 
-                    string test = "";
+                    
                     //string pPick = pick.PlayerPick.ToString();
                     if (winners[index].Team_Name.Equals(picks[index].PlayerPick))
                     {
@@ -107,8 +107,6 @@ namespace Football_Picks.Helpers
                         string winUrl = "/img/nfl-logo/" + winAbr + ".png";
 
                         winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, "YES"));
-                        test = "";
-
                     }
                     else
                     {
@@ -119,8 +117,7 @@ namespace Football_Picks.Helpers
                         string pPickUrl = "/img/nfl-logo/" + playerPickAbr + ".png";
                         string winUrl = "/img/nfl-logo/" + winAbr + ".png";
 
-                        winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, "NO"));
-                        test = "";
+                        winList.Add(new MatchupWinner(winners[index].Team_Name, picks[index].PlayerPick, winUrl, pPickUrl, "NO"));  
                     }
                     index++;
                 }
@@ -475,8 +472,8 @@ namespace Football_Picks.Helpers
                     return "cincinnati-bengals";
                 case "Browns":
                     return "cleveland-browns";
-                case "Steelers":
-                    return "pittsburg-steelers";
+                case "Pittsburgh":
+                    return "pittsburgh-steelers";
                 case "Houston":
                     return "houston-texans";
                 case "Indianapolis":
